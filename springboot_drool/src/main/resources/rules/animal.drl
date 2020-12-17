@@ -1,0 +1,23 @@
+package com.drool.demo.entity;
+
+import com.drool.demo.entity.Animal
+import com.drool.demo.entity.People
+
+dialect  "java"
+
+//rule "from"
+//when
+//    $an : Animal()
+//    $p : People(sex != 3 && drlType == "people") from $an.peoples
+//    then
+//        System.out.println($p);
+//    end
+
+rule "ani"
+when
+    $animal : Animal()
+    $p : People(sex != 3 && drlType == "people") from $animal.peoples
+    then
+        System.out.println("animal_from规则运行");
+        System.out.println($p);
+    end

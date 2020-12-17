@@ -1,0 +1,19 @@
+package com.drool.demo.entity;
+
+import com.drool.demo.entity.Animal
+import com.drool.demo.entity.People
+import com.drool.demo.utils.DroolsStringUtils
+#import function com.drool.demo.utils.DroolsStringUtils.isEmpty
+import  com.drool.demo.utils.DroolsStringUtils
+
+
+rule "import"
+
+    when
+//        droolsStringUtils : DroolsStringUtils()
+        $p : People(drlType == "people")
+    then
+        System.out.println("import执行");
+        System.out.println("import" + DroolsStringUtils.isEmpty($p.getName()));
+
+end
