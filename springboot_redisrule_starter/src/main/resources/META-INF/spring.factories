@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.yb.redisrule.RuleDataExecutor.RuleRedisProcesserAutoConfig,\
+  com.yb.redisrule.RuleDataExecutor.RuleExecutorContextAutoConfig
