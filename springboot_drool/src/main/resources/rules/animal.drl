@@ -1,23 +1,39 @@
-package com.drool.demo.entity;
+package rules;
 
 import com.drool.demo.entity.Animal
 import com.drool.demo.entity.People
 
 dialect  "java"
 
-//rule "from"
-//when
-//    $an : Animal()
-//    $p : People(sex != 3 && drlType == "people") from $an.peoples
-//    then
-//        System.out.println($p);
-//    end
-
 rule "ani"
+no-loop  true
 when
-    $animal : Animal()
-    $p : People(sex != 3 && drlType == "people") from $animal.peoples
+    animal : Animal()
+    p : People(true) from animal.peoples
     then
+
         System.out.println("animal_from规则运行");
-        System.out.println($p);
+        System.out.println(p);
     end
+
+
+/*rule "ani_people_in"
+ when
+    $animal : Animal()
+    $p : People(name in("芬奇","达芬奇")) from $animal.peoples
+    eval($p.getSex() == 2)
+ then
+    System.out.println("ani_people_in 运行");
+    System.out.println($p);
+    System.out.println(drools.getRule().getName());
+ end*/
+
+
+/*rule "ani_from"
+when
+    $animal : Animal($peoples : peoples)
+    exists(People (name == "芬奇") from $peoples)
+then
+    System.out.println("ani_from 规则触发");
+
+end*/

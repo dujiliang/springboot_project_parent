@@ -3,8 +3,10 @@ package com.drool.demo;
 
 import com.drool.demo.entity.Animal;
 import com.drool.demo.entity.Cat;
+import com.drool.demo.entity.Golfer;
 import com.drool.demo.entity.People;
 import com.drool.demo.utils.DroolsStringUtils;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kie.api.KieBase;
@@ -24,12 +26,28 @@ public class SpringbootDroolApplicationTests {
 	@Autowired
 	private KieSession session;
 
-	@Autowired
-	private KieBase kieBase;
+
 
 	@Test
 	public void contextLoads() {
 
+	}
+
+	@Test
+	public void testGolfer () {
+		List<String> memberList = Lists.newArrayList("Fred","Joe","Bob","Tom");
+		List<Integer> positionList = Lists.newArrayList(1,2,3,4);
+		ArrayList<String> colorList = Lists.newArrayList("red", "blue", "orange", "plaid");
+		for (String name : memberList) {
+			for (Integer pos : positionList) {
+				for (String color : colorList) {
+					Golfer golfer = new Golfer(name,color,pos);
+					session.insert(golfer);
+				}
+			}
+		}
+		int i = session.fireAllRules();
+		System.out.println(i);
 	}
 
 	@Test
@@ -56,10 +74,11 @@ public class SpringbootDroolApplicationTests {
 		animal.setPeoples(peopleList);
 		DroolsStringUtils droolsStringUtils = new DroolsStringUtils();
 		//session.insert(droolsStringUtils);
-//		session.insert(animal);
+		session.insert(animal);
 //		session.insert(cat);
-		session.insert(people);
-//		session.insert(people1);//插入
+//		session.insert(cat);
+		session.insert(people1);//插入
 		session.fireAllRules();//执行规则
 	}
+
 }

@@ -48,12 +48,13 @@ public class KiaSessionConfig {
     public KieContainer kieContainer() throws IOException {
 
         final KieRepository kieRepository = getKieServices().getRepository();
-        kieRepository.addKieModule(new KieModule() {
+        /*kieRepository.addKieModule(new KieModule() {
             @Override
             public ReleaseId getReleaseId() {
                 return kieRepository.getDefaultReleaseId();
             }
-        });
+        });*/
+        kieRepository.addKieModule(() ->  kieRepository.getDefaultReleaseId());
 
         KieBuilder kieBuilder = getKieServices().newKieBuilder(kieFileSystem());
         kieBuilder.buildAll();
